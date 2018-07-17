@@ -13,7 +13,7 @@ version = '1.0'
     def d = "$l ${(v.size() + l.size() + 1) % 2 != 0 ? "-" : "--"} v$v"
     def w = (0..(30 - d.size() / 2)).collect { it % 2 != 0 ? '-' : '=' }.join ''
     println "|$w| $d |${w.reverse()}|"
-})("Aru IO Pipes Library", version)
+})("Aru Properties Library", version)
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
