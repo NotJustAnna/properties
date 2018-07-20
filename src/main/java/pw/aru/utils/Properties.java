@@ -415,4 +415,19 @@ public class Properties extends ConcurrentHashMap<String, String> {
             true
         );
     }
+
+    /**
+     * Stores values into a String.
+     *
+     * @param comments (Optional) Comments written on the beginning of the File.
+     * @return The values written to a String.
+     * @throws IOException if an IOException occurs.
+     */
+    @NotNull
+    public String storeToString(@Nullable String comments) throws IOException {
+        StringWriter w = new StringWriter();
+        _store(new BufferedWriter(w), comments, false);
+        return w.toString();
+    }
+
 }
