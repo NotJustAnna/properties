@@ -124,10 +124,10 @@ public class Properties extends ConcurrentHashMap<String, String> {
     };
 
     /**
-     * Loads a {@link Properties} from the Filesystem.
+     * Loads the {@link Properties} from the file system.
      *
      * @param file File to read properties from.
-     * @return A new {@link Properties} instance loaded with the content from the file.
+     * @return A {@link Properties} instance loaded with the content from the file.
      * @throws IOException if an IOException occurs.
      */
     @NotNull
@@ -135,6 +135,121 @@ public class Properties extends ConcurrentHashMap<String, String> {
         Properties p = new Properties();
         p.load(new FileInputStream(file));
         return p;
+    }
+
+    /**
+     * Loads the {@link Properties} from the file system.
+     *
+     * @param file File to read properties from.
+     * @return A new {@link Properties} instance loaded with the content from the file.
+     * @throws IOException if an IOException occurs.
+     */
+    @NotNull
+    public static Properties fromFile(@NotNull String file) throws IOException {
+        return fromFile(new File(file));
+    }
+
+    /**
+     * Loads the {@link Properties} from a string.
+     *
+     * @param string String to read properties from.
+     * @return A {@link Properties} instance loaded with the content from the string.
+     * @throws IOException if an IOException occurs.
+     */
+    @NotNull
+    public static Properties fromString(@NotNull String string) throws IOException {
+        Properties p = new Properties();
+        p.loadFromString(string);
+        return p;
+    }
+
+    /**
+     * Loads values from the Reader.
+     *
+     * @param reader Reader to read the values from.
+     * @throws IOException if an IOException occurs.
+     */
+    public synchronized void load(@NotNull Reader reader) throws IOException {
+        _load(new LineReader(reader));
+    }
+
+    /**
+     * Loads values from the InputStream.
+     *
+     * @param inStream InputStream to read the values from.
+     * @throws IOException if an IOException occurs.
+     */
+    public synchronized void load(@NotNull InputStream inStream) throws IOException {
+        _load(new LineReader(inStream));
+    }
+
+    /**
+     * Loads values from a String.
+     *
+     * @param string Reader to read the values from.
+     * @throws IOException if an IOException occurs.
+     */
+    public synchronized void loadFromString(@NotNull String string) throws IOException {
+        _load(new LineReader(new StringReader(string)));
+    }
+
+    /**
+     * Stores values into a OutputStream.
+     *
+     * @param out      OutputStream to write the values to.
+     * @param comments (Optional) Comments written on the beginning of the OutputStream.
+     * @throws IOException if an IOException occurs.
+     */
+    public synchronized void store(@NotNull OutputStream out, @Nullable String comments) throws IOException {
+        _store(
+            new BufferedWriter(new OutputStreamWriter(out, "8859_1")),
+            comments,
+            true
+        );
+    }
+
+    /**
+     * Stores values into a Writer.
+     *
+     * @param writer   Writer to write the values to.
+     * @param comments (Optional) Comments written on the beginning of the Writer.
+     * @throws IOException if an IOException occurs.
+     */
+    public synchronized void store(@NotNull Writer writer, @Nullable String comments) throws IOException {
+        _store(
+            (writer instanceof BufferedWriter) ? (BufferedWriter) writer : new BufferedWriter(writer),
+            comments,
+            false
+        );
+    }
+
+    /**
+     * Stores values into a File.
+     *
+     * @param file     File to write the values to.
+     * @param comments (Optional) Comments written on the beginning of the File.
+     * @throws IOException if an IOException occurs.
+     */
+    public synchronized void store(@NotNull File file, @Nullable String comments) throws IOException {
+        _store(
+            new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "8859_1")),
+            comments,
+            true
+        );
+    }
+
+    /**
+     * Stores values into a String.
+     *
+     * @param comments (Optional) Comments written on the beginning of the File.
+     * @return The values written to a String.
+     * @throws IOException if an IOException occurs.
+     */
+    @NotNull
+    public synchronized String storeToString(@Nullable String comments) throws IOException {
+        StringWriter w = new StringWriter();
+        _store(new BufferedWriter(w), comments, false);
+        return w.toString();
     }
 
     private static char toHex(int nibble) {
@@ -234,26 +349,6 @@ public class Properties extends ConcurrentHashMap<String, String> {
             }
         }
         bw.flush();
-    }
-
-    /**
-     * Loads values from the Reader.
-     *
-     * @param reader Reader to read the values from.
-     * @throws IOException if an IOException occurs.
-     */
-    public synchronized void load(@NotNull Reader reader) throws IOException {
-        _load(new LineReader(reader));
-    }
-
-    /**
-     * Loads values from the InputStream.
-     *
-     * @param inStream InputStream to read the values from.
-     * @throws IOException if an IOException occurs.
-     */
-    public synchronized void load(@NotNull InputStream inStream) throws IOException {
-        _load(new LineReader(inStream));
     }
 
     private String loadConvert(char[] in, int off, int len, char[] convtBuf) {
@@ -369,65 +464,6 @@ public class Properties extends ConcurrentHashMap<String, String> {
             }
         }
         return b.toString();
-    }
-
-    /**
-     * Stores values into a OutputStream.
-     *
-     * @param out      OutputStream to write the values to.
-     * @param comments (Optional) Comments written on the beginning of the OutputStream.
-     * @throws IOException if an IOException occurs.
-     */
-    public void store(@NotNull OutputStream out, @Nullable String comments) throws IOException {
-        _store(
-            new BufferedWriter(new OutputStreamWriter(out, "8859_1")),
-            comments,
-            true
-        );
-    }
-
-    /**
-     * Stores values into a Writer.
-     *
-     * @param writer   Writer to write the values to.
-     * @param comments (Optional) Comments written on the beginning of the Writer.
-     * @throws IOException if an IOException occurs.
-     */
-    public void store(@NotNull Writer writer, @Nullable String comments) throws IOException {
-        _store(
-            (writer instanceof BufferedWriter) ? (BufferedWriter) writer : new BufferedWriter(writer),
-            comments,
-            false
-        );
-    }
-
-    /**
-     * Stores values into a File.
-     *
-     * @param file     File to write the values to.
-     * @param comments (Optional) Comments written on the beginning of the File.
-     * @throws IOException if an IOException occurs.
-     */
-    public void store(@NotNull File file, @Nullable String comments) throws IOException {
-        _store(
-            new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "8859_1")),
-            comments,
-            true
-        );
-    }
-
-    /**
-     * Stores values into a String.
-     *
-     * @param comments (Optional) Comments written on the beginning of the File.
-     * @return The values written to a String.
-     * @throws IOException if an IOException occurs.
-     */
-    @NotNull
-    public String storeToString(@Nullable String comments) throws IOException {
-        StringWriter w = new StringWriter();
-        _store(new BufferedWriter(w), comments, false);
-        return w.toString();
     }
 
 }
