@@ -1,7 +1,11 @@
 # Properties
 Clean version of java.util.Properties, using new stuff like HashMaps and Generics.
 
-Get it on JCenter: ``pw.aru.utils:properties:1.2``
+Get it on JCenter: ``pw.aru.utils:properties:LATEST``
+
+Latest Version:
+
+![Latest Version](https://api.bintray.com/packages/adriantodt/maven/properties/images/download.svg)
 
 ## Usage
 
