@@ -1,15 +1,47 @@
 # Properties
-Clean version of java.util.Properties, using new stuff like HashMaps and Generics.
+Clean version of java.util.Properties, using new stuff like ConcurrentHashMaps and Generics.
 
-Get it on JCenter: ``net.notjustanna.utils:properties:LATEST``
+Licensed under the [%license% License](https://github.com/notjustanna/properties/blob/master/LICENSE).
 
-Latest Version:
+### Installation
 
 ![Latest Version](https://api.bintray.com/packages/notjustanna/maven/properties/images/download.svg)
 
-## Usage
+Using in Gradle:
 
-### Reading:
+```gradle
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile 'net.notjustanna.libs:properties:LATEST' // replace LATEST with the version above
+}
+```
+
+Using in Maven:
+
+```xml
+<repositories>
+  <repository>
+    <id>central</id>
+    <name>bintray</name>
+    <url>http://jcenter.bintray.com</url>
+  </repository>
+</repositories>
+
+<dependencies>
+  <dependency>
+    <groupId>net.notjustanna.libs</groupId>
+    <artifactId>properties</artifactId>
+    <version>LATEST</version> <!-- replace LATEST with the version above -->
+  </dependency>
+</dependencies>
+```
+
+### Usage
+
+#### Reading:
 
 ```java
 // New Instance
@@ -20,10 +52,9 @@ Properties properties = Properties.fromFile(file);
 
 //Load from String
 Properties properties = Properties.fromString("url=localhost\nport=8080");
-
 ```
 
-### Writing:
+#### Writing:
 
 ```java
 // Save as String
@@ -35,3 +66,11 @@ properties.store(file, "Test Properties");
 // Write to a writer
 properties.store(writer, "Test Properties");
 ```
+
+
+### Support
+
+
+
+
+

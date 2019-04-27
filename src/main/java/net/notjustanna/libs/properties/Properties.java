@@ -1,4 +1,4 @@
-package net.notjustanna.utils;
+package net.notjustanna.libs.properties;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -465,5 +465,4 @@ public class Properties extends ConcurrentHashMap<String, String> {
         }
         return b.toString();
     }
-
 }
