@@ -1,15 +1,47 @@
 # Properties
-Clean version of java.util.Properties, using new stuff like HashMaps and Generics.
+Clean version of java.util.Properties, using new stuff like ConcurrentHashMaps and Generics.
 
-Get it on JCenter: ``pw.aru.utils:properties:LATEST``
+Licensed under the [%license% License](https://github.com/arudiscord/properties/blob/master/LICENSE).
 
-Latest Version:
+### Installation
 
-![Latest Version](https://api.bintray.com/packages/adriantodt/maven/properties/images/download.svg)
+![Latest Version](https://api.bintray.com/packages/arudiscord/maven/properties/images/download.svg)
 
-## Usage
+Using in Gradle:
 
-### Reading:
+```gradle
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile 'pw.aru.libs:properties:LATEST' // replace LATEST with the version above
+}
+```
+
+Using in Maven:
+
+```xml
+<repositories>
+  <repository>
+    <id>central</id>
+    <name>bintray</name>
+    <url>http://jcenter.bintray.com</url>
+  </repository>
+</repositories>
+
+<dependencies>
+  <dependency>
+    <groupId>pw.aru.libs</groupId>
+    <artifactId>properties</artifactId>
+    <version>LATEST</version> <!-- replace LATEST with the version above -->
+  </dependency>
+</dependencies>
+```
+
+### Usage
+
+#### Reading:
 
 ```java
 // New Instance
@@ -20,10 +52,9 @@ Properties properties = Properties.fromFile(file);
 
 //Load from String
 Properties properties = Properties.fromString("url=localhost\nport=8080");
-
 ```
 
-### Writing:
+#### Writing:
 
 ```java
 // Save as String
@@ -35,3 +66,11 @@ properties.store(file, "Test Properties");
 // Write to a writer
 properties.store(writer, "Test Properties");
 ```
+
+
+### Support
+
+Support is given on [Aru's Discord Server](https://discord.gg/URPghxg)
+
+[![Aru's Discord Server](https://discordapp.com/api/guilds/403934661627215882/embed.png?style=banner2)](https://discord.gg/URPghxg)
+
