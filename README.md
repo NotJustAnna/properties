@@ -1,7 +1,7 @@
 # Properties
 Clean version of java.util.Properties, using new stuff like ConcurrentHashMaps and Generics.
 
-Licensed under the [%license% License](https://github.com/notjustanna/properties/blob/master/LICENSE).
+Licensed under the [MIT License](https://github.com/notjustanna/properties/blob/master/LICENSE).
 
 ### Installation
 
