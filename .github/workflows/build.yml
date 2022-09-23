@@ -32,8 +32,6 @@ jobs:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
-      -
-
       - name: Stop Gradle
         run: ./gradlew --stop
 
