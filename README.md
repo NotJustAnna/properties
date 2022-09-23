@@ -42,7 +42,9 @@ dependencies {
 #### Gradle Kotlin
 
 ```kotlin
-maven("https://maven.adriantodt.net/releases")
+maven {
+    url = uri("https://maven.adriantodt.net/snapshots")
+}
 ```
 
 ```kotlin
