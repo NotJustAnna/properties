@@ -7,8 +7,6 @@ It is a drop-in replacement for java.util.Properties, and is fully compatible wi
 
 [![Latest Version](https://maven.adriantodt.net/api/badge/latest/releases/net/adriantodt/properties?color=40c14a&name=Maven&prefix=v)](https://maven.adriantodt.net/releases/net/adriantodt/properties)
 
-```xml
-
 #### Maven
 
 ```xml
