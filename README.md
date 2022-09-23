@@ -1,42 +1,66 @@
 # Properties
-Clean version of java.util.Properties, using new stuff like ConcurrentHashMaps and Generics.
 
-Licensed under the [MIT License](https://github.com/arudiscord/properties/blob/master/LICENSE).
+Properties is a simple, clean implementation of java.util.Properties, using new stuff like ConcurrentHashMaps and Generics.
+It is a drop-in replacement for java.util.Properties, and is fully compatible with it.
 
 ### Installation
 
-![Latest Version](https://api.bintray.com/packages/arudiscord/maven/properties/images/download.svg)
+![Latest Version](https://maven.adriantodt.net/api/badge/latest/releases/net/adriantodt/properties?color=40c14a&name=Maven&prefix=v)
 
-Using in Gradle:
+#### Maven
 
-```gradle
-repositories {
-  jcenter()
-}
+```xml
+<repository>
+    <id>adriantodt-repository-releases</id>
+    <name>AdrianTodt Repository</name>
+    <url>https://maven.adriantodt.net/releases</url>
+</repository>
+```
 
-dependencies {
-  compile 'pw.aru.libs:properties:LATEST' // replace LATEST with the version above
+```xml
+<dependency>
+    <groupId>net.adriantodt</groupId>
+    <artifactId>properties</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+#### Gradle Groovy
+
+```groovy
+maven {
+    url "https://maven.adriantodt.net/releases"
 }
 ```
 
-Using in Maven:
+```groovy
+dependencies {
+    implementation "net.adriantodt:properties:1.0.0"
+}
+```
 
-```xml
-<repositories>
-  <repository>
-    <id>central</id>
-    <name>bintray</name>
-    <url>http://jcenter.bintray.com</url>
-  </repository>
-</repositories>
+#### Gradle Kotlin
 
-<dependencies>
-  <dependency>
-    <groupId>pw.aru.libs</groupId>
-    <artifactId>properties</artifactId>
-    <version>LATEST</version> <!-- replace LATEST with the version above -->
-  </dependency>
-</dependencies>
+```kotlin
+maven("https://maven.adriantodt.net/releases")
+```
+
+```kotlin
+dependencies {
+    implementation("net.adriantodt:properties:1.0.0")
+}
+```
+
+#### SBT
+
+```scala
+resolvers +=
+  "adriantodt-repository-releases" 
+     at "https://maven.adriantodt.net/releases"
+```
+    
+```scala
+libraryDependencies += "net.adriantodt" % "properties" % "1.0.0"
 ```
 
 ### Usage
@@ -67,10 +91,6 @@ properties.store(file, "Test Properties");
 properties.store(writer, "Test Properties");
 ```
 
+## License
 
-### Support
-
-Support is given on [Aru's Discord Server](https://discord.gg/URPghxg)
-
-[![Aru's Discord Server](https://discordapp.com/api/guilds/403934661627215882/embed.png?style=banner2)](https://discord.gg/URPghxg)
-
+The project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
